@@ -1,1 +1,14 @@
-console.log("Hello from Js file");
+import {MikroORM} from '@mikro-orm/core';
+import { __prod__ } from './constants';
+import { Post } from './entities/Post';
+
+const main = async ()=>{
+    let orm = await MikroORM.init({
+        entities: [Post],
+        dbName:'lireddit',
+        type:'postgresql',
+        debug: !__prod__,
+    });
+}
+
+main();
