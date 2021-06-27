@@ -9,6 +9,11 @@ const main = async ()=>{
         type:'postgresql',
         debug: !__prod__,
     });
+
+    let post = orm.em.create(Post,{title:'first lireddit post.'});
+    await orm.em.persistAndFlush(post)
 }
 
-main();
+main().catch((err) =>{
+    console.log(err);
+});

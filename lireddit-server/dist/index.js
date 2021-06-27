@@ -19,6 +19,10 @@ const main = () => __awaiter(void 0, void 0, void 0, function* () {
         type: 'postgresql',
         debug: !constants_1.__prod__,
     });
+    let post = orm.em.create(Post_1.Post, { title: 'first lireddit post.' });
+    yield orm.em.persistAndFlush(post);
 });
-main();
+main().catch((err) => {
+    console.log(err);
+});
 //# sourceMappingURL=index.js.map
