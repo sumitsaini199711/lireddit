@@ -13,13 +13,18 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const core_1 = require("@mikro-orm/core");
-const Post_1 = require("./entities/Post");
+const express_1 = __importDefault(require("express"));
 const mikro_orm_config_1 = __importDefault(require("./mikro-orm.config"));
 const main = () => __awaiter(void 0, void 0, void 0, function* () {
     let orm = yield core_1.MikroORM.init(mikro_orm_config_1.default);
     yield orm.getMigrator().up();
-    let post = orm.em.create(Post_1.Post, { title: 'first lireddit post.' });
-    yield orm.em.persistAndFlush(post);
+    const app = express_1.default();
+    app.get('/', (req, res) => {
+        console.log('root path');
+    });
+    app.listen(4000, () => {
+        console.log("Server listening on port 4000.");
+    });
 });
 main().catch((err) => {
     console.log(err);
